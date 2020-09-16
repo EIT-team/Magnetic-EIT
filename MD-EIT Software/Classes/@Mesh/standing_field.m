@@ -14,7 +14,14 @@
 %the different stimulation pairs.
 function obj = standing_field(obj, scalar_or_vector)
 obj.standing_field_form = scalar_or_vector;
-obj.standing_field_data.electric_field = fwd_solve(obj.EIDORS_image);
-obj.standing_field_data.magnetic_field = magnetic_field(obj.EIDORS_image, obj.standing_field_data.electric_field, obj.magnetic_field_sensor_locations, obj.volumes, obj.centres, 1, scalar_or_vector);
+if strcmp(scalar_or_vector,'vector') == true && isempty(obj.unperturbed_magnetic_field) == false && isempty(obj.unperturbed_voltages) == false
+    obj.standing_field_data.electric_field = obj.unperturbed_voltages;
+    obj.standing_field_data.magnetic_field = obj.unperturbed_magnetic_field;
+else
+    obj.standing_field_data.electric_field = fwd_solve(obj.EIDORS_image);
+    obj.standing_field_data.magnetic_field = magnetic_field(obj.EIDORS_image, obj.standing_field_data.electric_field, obj.magnetic_field_sensor_locations, obj.volumes, obj.centres, 1, scalar_or_vector);
+    obj.unperturbed_voltages = obj.standing_field_data.electric_field;
+    obj.unperturbed_magnetic_field = obj.standing_field_data.magnetic_field;
+end
 end
 

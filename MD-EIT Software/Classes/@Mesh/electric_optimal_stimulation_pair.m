@@ -24,6 +24,12 @@ if voltage_stim ==true
     stim = current2voltage(stim, amplitude);
 end
 temp_img.fwd_model.stimulation = stim;
-obj.electric_optimal_stimulation_data{perturbation_number} = electric_optimal_stimulation(temp_img,  obj.volumes, obj.electrode_positions, obj.perturbation_indices, perturbation_number, obj.perturbation_conductivity_increase, obj.perturbation_location, obj.perturbation_radius, obj.centre);
+obj.electric_optimal_stimulation_data{perturbation_number} = electric_optimal_stimulation(temp_img,  obj.volumes, obj.electrode_positions, obj.perturbation_indices, perturbation_number, obj.perturbation_conductivity_increase, obj.perturbation_location, obj.perturbation_radius, obj.centre, obj.electric_optimal_unperturbed_voltages);
+
+if isempty(obj.electric_optimal_unperturbed_voltages)
+    idx = find(~cellfun('isempty', obj.electric_optimal_stimulation_data));
+    obj.electric_optimal_unperturbed_voltages = obj.electric_optimal_stimulation_data{idx(1)}.raw_data.unperturbed_voltages;
+end
+
 end
 
