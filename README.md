@@ -1,6 +1,6 @@
 # Magnetic-EIT-
-A set of functions to be used in conjunction with EIDORS software/structures in Matlab to deal with magnetic field measurements combined with EIT.
-Currently these functions are suitable for calculation of the forward solution for the magnetic field in 3-D FEMs with tetrahedral elements. This software assumes prior competancy using EIDORS with Netgen for EIT forward problem calculations. The classes in this software currently support three different mesh types, a sphere, a human head and a wire. 
+A set of classes and functions to be used in conjunction with EIDORS software in Matlab to deal with magnetic field measurements combined with EIT.
+Currently these classes and functions are suitable for problems concerning the forward problem for the magnetic field of MD-EIT. The software is only compatible with 3-D FEMs with tetrahedral elements. This software assumes prior competancy using EIDORS with Netgen for EIT forward problem calculations. 
 
 Instructions:
 
