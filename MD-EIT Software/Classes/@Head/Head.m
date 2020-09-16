@@ -8,11 +8,12 @@ classdef Head < Mesh
     methods
         function obj = Head(z_contact)
             %Constructor for the head mesh, initialises variables specific
-            %to this mesh.
+            %to this mesh.           
+            obj.mesh_name = 'Head';
             obj.EIDORS_FEM = make_head_Mesh01000(z_contact);
+            obj.centre = obj.EIDORS_FEM.middle;
             obj.electrode_positions = obj.EIDORS_FEM.electrode_positions;
             obj.contact_impedance = z_contact;
-            obj.centre = obj.EIDORS_FEM.middle;
             obj.EIDORS_image = mk_image(obj.EIDORS_FEM, 0.3);
             obj.volumes = get_elem_volume(obj.EIDORS_FEM);
             obj.centres = find_element_centres(obj.EIDORS_FEM);

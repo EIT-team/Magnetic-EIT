@@ -38,5 +38,18 @@ if voltage_stim ==true
     stim = current2voltage(stim, amplitude);
 end
 temp_img.fwd_model.stimulation = stim;
-obj.optimal_stimulation_data{perturbation_number} = optimal_stimulation(temp_img,obj.centres,  obj.volumes, obj.magnetic_field_sensor_locations, obj.electrode_positions, obj.perturbation_indices, perturbation_number, obj.perturbation_conductivity_increase, obj.perturbation_location, obj.perturbation_radius, obj.centre, chunk);
+
+
+obj.optimal_stimulation_data{perturbation_number} = optimal_stimulation(temp_img,obj.centres,  obj.volumes, obj.magnetic_field_sensor_locations, obj.electrode_positions, obj.perturbation_indices, perturbation_number, obj.perturbation_conductivity_increase, obj.perturbation_location, obj.perturbation_radius, obj.centre, chunk, obj.magnetic_optimal_unperturbed_voltages, obj.magnetic_optimal_unperturbed_magnetic_field);
+
+if isempty(obj.magnetic_optimal_unperturbed_voltages)
+    idx = find(~cellfun('isempty', obj.optimal_stimulation_data));
+    obj.magnetic_optimal_unperturbed_voltages = obj.optimal_stimulation_data{idx(1)}.raw_data.unperturbed_voltages;
+end
+
+if isempty(obj.magnetic_optimal_unperturbed_magnetic_field)
+    idx = find(~cellfun('isempty', obj.optimal_stimulation_data));
+    obj.magnetic_optimal_unperturbed_magnetic_field = obj.optimal_stimulation_data{idx(1)}.raw_data.unperturbed_magnetic_field;
+end
+
 end

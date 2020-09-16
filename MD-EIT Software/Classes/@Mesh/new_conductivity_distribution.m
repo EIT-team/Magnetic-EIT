@@ -5,5 +5,6 @@
 %Sm^(-1) where N = number of elements in the mesh.
 function obj = new_conductivity_distribution(obj, conductivities)
 obj.EIDORS_image.elem_data = conductivities;
+obj.homogeneous_data = obj.EIDORS_image.elem_data;
 end
 

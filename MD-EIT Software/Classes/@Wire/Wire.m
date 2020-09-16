@@ -5,10 +5,14 @@ classdef Wire < Mesh
     end
     
     methods
-        function obj = Wire(conductivity, z_contact)
+        function obj = Wire(conductivity, z_contact, maximum_size_of_elements)
+            if nargin == 2
+                maximum_size_of_elements = 0.1;
+            end
             %constructor for the Wire class, initialises variables specific
             %to this mesh. 
-            obj.EIDORS_FEM = make_wire(z_contact);
+            obj.mesh_name = 'Wire';
+            obj.EIDORS_FEM = make_wire(z_contact, maximum_size_of_elements);
             obj.electrode_positions = obj.EIDORS_FEM.electrode_positions;
             obj.contact_impedance = z_contact;
             obj.centre = [0,0,0];
