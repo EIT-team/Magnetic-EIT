@@ -6,7 +6,7 @@ classdef Sphere < Mesh
     end
     
     methods
-        function obj = Sphere(z_contact, max_size_of_elements)
+        function obj = Sphere(radius, z_contact, max_size_of_elements)
             %Constructor for the Sphere class, initialises variables
             %specific to this mesh.
             %z_contact:
@@ -22,7 +22,7 @@ classdef Sphere < Mesh
                 max_size_of_elements = 0.1;
             end
             obj.mesh_name = 'Sphere';
-            obj.EIDORS_FEM = make_sphere(max_size_of_elements);
+            obj.EIDORS_FEM = make_sphere(radius,max_size_of_elements);
             electrode_positions = EEG_10_20_sphere_positions(0.1);
             obj.electrode_positions = electrode_positions(:,1:3);
             obj.contact_impedance = z_contact;
